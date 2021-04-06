@@ -1,7 +1,7 @@
 <template>
-    <section class="country-data">
-        <div v-if="error == false" id="success-data">
-            <h2>Italy &#127470;&#127481;</h2>
+    <div class="country-data" v-if="countryInput.length != 0">
+        <div v-if="error == false" id="success--data">
+            <h2>{{ countryInput }}</h2>
             <div class="covid-data">
                 <p class="inner-data"><strong>Casi Totali:</strong> <span class="single-data">{{ covidCasesLive }}</span></p>
                 <p class="inner-data"><strong>Infetti Attivi:</strong> <span class="single-data">{{ covidActiveLive }}</span></p>
@@ -13,16 +13,18 @@
             <p>Ops! Si è verificato un errore.</p>
             <p>Errore: {{ errorLog }}</p>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-    name: "ItalianData",
+    name: "CountryData",
+    props:['countrySelectedPass'],
     data() {
         return {
+            countryInput: '',
             covidCasesLive: 0,
             covidActiveLive: 0,
             covidRecoveredLive: 0,
@@ -31,7 +33,10 @@ export default {
             errorLog: '',
         }
     },
-    mounted() {
+    watch: {
+        countrySelectedPass: function(newVal) {
+        this.countryInput = newVal; //Assegno a variabile paese inserito in "SearchCountry"
+
         var MyDate = new Date();
 
         var yesterday = (MyDate.getFullYear() + '-' + ('0' + (MyDate.getMonth()+1)).slice(-2) + '-' + ('0' + (MyDate.getDate() - 1)).slice(-2)) + 'T00:00:00Z';
@@ -39,7 +44,7 @@ export default {
 
         const options = { //Parametri API
             method: 'GET',
-            url: 'https://api.covid19api.com/live/country/italy/status/confirmed',
+            url: 'https://api.covid19api.com/live/country/' + this.countryInput + '/status/confirmed',
             params: {from: twoDaysAgo, to: yesterday},
             headers: {
                 'X-Access-Token': '5cf9dfd5-3449-485e-b5ae-70a60e997864',
@@ -47,6 +52,7 @@ export default {
         };
 
         axios.request(options).then( (response) => { //Chiamata Axios con parametri citati in precedenza
+        console.log(response.data);
             var totalCases = 0;
             var totalActive = 0;
             var totalDeaths = 0;
@@ -71,20 +77,15 @@ export default {
             this.error = true;
             this.errorLog = error;
         });
+        }
     }
 }
 </script>
 
 <style lang="scss">
     .country-data {
-        border: 2.5px solid white;
-        border-radius: 5px;
         padding: 20px;
-
-        .inner-data {
-            font-size: 20px;
-            margin: 10px 0 0;
-        }
-        
+        width: 50%;
+        margin-top: 50px;
     }
 </style>

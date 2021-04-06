@@ -1,18 +1,36 @@
 <template>
   <div class="container">
     <Header/>
-    <italian-data/> 
+    <div id="sections-wrapper">
+      <div class="covid-wrapper">
+        <search-country @country-value="getCountryInput"></search-country>
+        <country-data :countrySelectedPass="countrySelected"></country-data>
+      </div>
+      <italian-data class="covid-wrapper"></italian-data> 
+    </div>
   </div>
 </template>
 
 <script>
 import Header from './components/layout/Header.vue';
 import ItalianData from './components/UI/ItalianData.vue';
+import SearchCountry from './components/UI/SearchCountry.vue';
+import CountryData from './components/UI/CountryData.vue'
 
 export default {
   name: 'App',
   components: {
-    Header, ItalianData
+    Header, ItalianData, SearchCountry,CountryData
+  },
+  data() {
+    return { 
+      countrySelected: '',
+    }
+  },
+  methods: {
+    getCountryInput(val) {
+      this.countrySelected = val;
+    }
   }
 }
 </script>
@@ -31,5 +49,19 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
+
+#sections-wrapper {
+    content: "";
+    display: table;
+    clear: both;
+    width: 100%;
+    margin: auto;
+
+  .covid-wrapper {
+    float: left;
+    width: 45%;
+  }
+}
+
 
 </style>

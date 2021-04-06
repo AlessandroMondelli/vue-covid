@@ -15,7 +15,7 @@ export default {
     #header {
         height: 80px;
         line-height: 80px;
-        margin-top: 30px;
+        margin: 30px 0 50px;
 
         h1 {
             font-size: 32px;

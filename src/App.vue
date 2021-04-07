@@ -6,21 +6,20 @@
         <search-country @country-value="getCountryInput"></search-country>
         <country-data :countrySelectedPass="countrySelected"></country-data>
       </div>
-      <italian-data class="covid-wrapper"></italian-data> 
+      <country-data id="italian-data" class="covid-wrapper" :countrySelectedPass="'Italy'"></country-data>
     </div>
   </div>
 </template>
 
 <script>
 import Header from './components/layout/Header.vue';
-import ItalianData from './components/UI/ItalianData.vue';
 import SearchCountry from './components/UI/SearchCountry.vue';
-import CountryData from './components/UI/CountryData.vue'
+import CountryData from './components/UI/CountryData.vue';
 
 export default {
   name: 'App',
   components: {
-    Header, ItalianData, SearchCountry,CountryData
+    Header, SearchCountry,CountryData
   },
   data() {
     return { 
@@ -59,7 +58,12 @@ export default {
 
   .covid-wrapper {
     float: left;
-    width: 45%;
+    width: 35%;
+  }
+
+  #italian-data.covid-wrapper {
+    float: right;
+    margin-top: 20px;
   }
 }
 

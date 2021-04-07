@@ -24,6 +24,7 @@ export default {
 <style lang="scss" scoped>
     form {
         padding: 20px 0 0;
+        margin-bottom: 50px;
 
         label {
         font-size: 22px;

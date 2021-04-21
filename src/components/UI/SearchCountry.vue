@@ -1,6 +1,6 @@
 <template>
     <form>
-        <label>Inserisci un paese</label>
+        <label>Verifica i dati del contagio COVID-19</label>
         <input type="text" name="country" id="country" placeholder="Inserisci un paese..." v-model.trim="countryInput" @keyup="sendCountry">
     </form>
 </template>
@@ -27,22 +27,63 @@ export default {
         margin-bottom: 50px;
 
         label {
-        font-size: 22px;
-        font-weight: bold;
+            font-weight: bold;
+        }
+
+        input {
+            width: 60%;
+            margin-top: 10px;
+            text-align: center;
         }
 
         #country {
             display: block;
-            margin: 15px 0 0;
             border: 2px solid white;
             border-radius: 5px;
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.397);
+            background-color: #AB3938;
             transition: 0.2s;
 
             &:hover {
                 border-color: black;
             }
+        }
+    }
+
+    $breakpoint-smartphone: 320px;
+    $breakpoint-tablet: 767px;
+    $breakpoint-laptop: 992px;
+    $breakpoint-large: 1200px;
+
+    @media (min-width: $breakpoint-smartphone) {
+        label {
+            font-size: 16px;
+        }
+
+        input {
+            margin-left: 50%;
+            transform: translate(-50%);
+            height: 10px;
+        }
+    }
+
+    @media (min-width: $breakpoint-tablet) {
+        label {
+            font-size: 20px;
+        }
+
+        input {
+            height: 30px;
+        }
+    }
+
+     @media (min-width: $breakpoint-laptop) {
+        label {
+            font-size: 28px;
+        }
+
+        input {
+            height: 30px;
         }
     }
     

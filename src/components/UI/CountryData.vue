@@ -6,7 +6,7 @@
                 <p class="inner-data"><strong>Casi Totali</strong> <span class="single-data">{{ covidCasesLive }}</span> <span :class="[ covidNewCases > 0 ? positive : negative]">{{ covidNewCases }}</span></p>
                 <p class="inner-data"><strong>Infetti Attivi</strong> <span class="single-data">{{ covidActiveLive }}</span> <span :class="[ covidNewActive > 0 ? positive : negative]">{{ covidNewActive }}</span></p>
                 <p class="inner-data"><strong>Morti</strong> <span class="single-data">{{ covidDeathsLive }}</span> <span :class="[ covidNewDeaths > 0 ? positive : negative]">{{ covidNewDeaths }}</span></p>
-                <p class="inner-data"><strong>Guariti</strong> <span class="single-data">{{ covidRecoveredLive }}</span> <span :class="[ covidNewRecovered >= 0 ? positive : negative]">{{ covidNewRecovered }}</span></p>
+                <p class="inner-data"><strong>Guariti</strong> <span class="single-data">{{ covidRecoveredLive }}</span> <span :class="[ covidNewRecovered >= 0 ? negative : positive]">{{ covidNewRecovered }}</span></p>
             </div>
         </div>
         <div v-else id="error-data">
@@ -105,9 +105,6 @@ export default {
             this.countryInput = newVal; //Assegno a variabile paese inserito in "SearchCountry"
             this.getCovidData(this.countryInput); //Richiamo method all'arrivo di un nuovo paese
         }
-    },
-    mounted() {
-        this.getCovidData(this.countrySelectedPass);
     }
 }
 </script>
@@ -118,10 +115,7 @@ export default {
         border-radius: 5px;
         padding: 20px;
         
-
-
         .inner-data {
-            font-size: 20px;
             margin: 10px 0 0;
             display: grid;
             grid-template-columns: 25% 25% 25%;
@@ -136,5 +130,16 @@ export default {
             }
         }
             
+    }
+
+    $breakpoint-smartphone: 320px;
+    $breakpoint-tablet: 767px;
+    $breakpoint-laptop: 992px;
+    $breakpoint-large: 1200px;
+
+    @media (min-width: $breakpoint-smartphone) {
+        .country-data {
+            font-size: 13px;
+        }
     }
 </style>

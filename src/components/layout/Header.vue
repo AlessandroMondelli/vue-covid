@@ -1,7 +1,7 @@
 <template>
     <section id="header">
         <h1>Covid-19 Stats</h1>
-        <img :src="require('@/assets/covid19.png')">
+        <img :src="require('@/assets/covid19.png')" alt="covid logo">
     </section>
 </template>
 
@@ -28,5 +28,19 @@ export default {
             vertical-align: middle;
             margin: 0 0 12px 15px;
         }
+    }
+
+    $breakpoint-smartphone: 320px;
+    $breakpoint-tablet: 767px;
+    $breakpoint-laptop: 992px;
+    $breakpoint-large: 1200px;
+
+    @media (min-width: $breakpoint-smartphone) {
+        #header {
+            h1 {
+                font-size: 24px;
+            }
+        }
+        
     }
 </style>

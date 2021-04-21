@@ -4,9 +4,13 @@
     <div id="sections-wrapper">
       <div class="covid-wrapper">
         <search-country @country-value="getCountryInput"></search-country>
+      </div>
+       <div class="covid-wrapper">
         <country-data :countrySelectedPass="countrySelected"></country-data>
       </div>
-      <country-data id="italian-data" class="covid-wrapper" :countrySelectedPass="'Italy'"></country-data>
+    </div>
+    <div id="container-logo">
+      <img id="logo-covid" :src="require('@/assets/covid19.png')" alt="covid logo">
     </div>
   </div>
 </template>
@@ -41,7 +45,14 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color:#DFDFDF;
+  background-color:#292626;
+  color: white;
+}
+
+body {
+  max-height: 95vh;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .container {
@@ -50,22 +61,73 @@ export default {
 }
 
 #sections-wrapper {
-    content: "";
-    display: table;
-    clear: both;
-    width: 100%;
-    margin: auto;
+    height: 55vh;
+    display: flex;
+    align-items: center;
 
   .covid-wrapper {
-    float: left;
-    width: 35%;
-  }
-
-  #italian-data.covid-wrapper {
-    float: right;
-    margin-top: 20px;
+    margin-left: 10%;
   }
 }
 
+
+#container-logo {
+    position: absolute;
+    filter: grayscale(100%);
+    transition: 1s;
+    overflow: hidden;
+
+    &:hover {
+      filter: grayscale(0);
+    }
+
+    img {
+      position: absolute;
+      height: 100%;
+    }
+  }
+
+$breakpoint-smartphone: 320px;
+$breakpoint-tablet: 767px;
+$breakpoint-laptop: 992px;
+$breakpoint-large: 1200px;
+
+@media (min-width: $breakpoint-smartphone) {
+  #sections-wrapper {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  #container-logo {
+    height: 100px;
+    width: 100px;
+    bottom: -10%;
+    right: 0;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  #container-logo {
+    height: 150px;
+    bottom: -10%;
+    right: 0;
+  }
+}
+
+@media (min-width: $breakpoint-laptop) {
+  #container-logo {
+    height: 300px;
+    bottom: -25%;
+    right: 0;
+  }
+}
+
+@media (min-width: $breakpoint-large) {
+  #container-logo {
+    height: 300px;
+    bottom: -15%;
+    right: 0%;
+  }
+}
 
 </style>
